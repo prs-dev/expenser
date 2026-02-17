@@ -5,32 +5,60 @@ require('dotenv').config()
 
 const app = express()
 
-app.post("/create", (req, res) => {
+app.use(express.json())
+
+app.post("/create-expense", async(req, res) => {
     try {
         const {amt, category, date, note} = req.body
+        
         if(!amt || !date) {
             return res.status(400).json({
                 msg: "please provide all the fields!"
             })
         }
+        
+        const expense = new Expense({
+            amt, category, date, note
+        })
+        
+        await expense.save()
+
         return res.status(200).json({
             msg: "success",
-            expenses: allExpenses
+            expenses: expense
         })
     } catch (error) {
         console.log("error in creating expense", error)
     }
 })
 
-app.get('/all', async(req, res) => {
+app.get('/all-expense', async(req, res) => {
     try {
         const allExpenses = await Expense.find({})
+
         return res.status(200).json({
             msg: "success",
             expenses: allExpenses
         })
+
     } catch (error) {
         console.log("error in getting all expenses", error)
+    }
+})
+
+app.delete("/delete-expense/:id", async(req, res) => {
+    try {
+        const expenseId = req.params.id
+        const response = await Expense.findByIdAndDelete(expenseId)
+        if(!response) return res.status(400).json({
+            msg: "not found!"
+        })
+        console.log("response", response)
+        return res.status(200).json({
+            msg: `successfully deleted expenseId:${response._id}`
+        })
+    } catch (error) {
+        console.log("error in deleting expense", error)
     }
 })
 

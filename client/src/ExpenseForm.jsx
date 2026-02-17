@@ -1,18 +1,30 @@
+const inputWrapperStyles = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "20px",
+}
+
+const inputStyles = {
+    width: "200px"
+}
+
 const ExpenseForm = () => {
     return (
         <form style={{
             display: "flex",
-            padding: "10px",
+            padding: "20px 0px",
             flexDirection: "column",
-            gap: "10px"
+            gap: "10px",
+            maxWidth: '400px'
         }}>
-            <div>
+            <div style={{...inputWrapperStyles}}>
                 <label>Amount</label>
-                <input type="number" />
+                <input type="number" style={{...inputStyles}}/>
             </div>
-            <div>
+            <div style={{...inputWrapperStyles}}>
                 <label>Category</label>
-                <select>
+                <select style={{...inputStyles}}>
                     <option value="" disabled>Select</option>
                     <option value="shopping">Shopping</option>
                     <option value="groceries">Groceries</option>
@@ -21,13 +33,16 @@ const ExpenseForm = () => {
                     <option value="other">Other</option>
                 </select>
             </div>
-            <div>
+            <div style={{...inputWrapperStyles}}>
                 <label>Date</label>
-                <input type="date" />
+                <input style={{...inputStyles}} type="date" />
+            </div>
+            <div style={{...inputWrapperStyles}}>
+                <label>Note</label>
+                <textarea style={{...inputStyles}} name="" id="" rows={5} cols={30} />
             </div>
             <div>
-                <label>Note</label>
-                <textarea name="" id="" rows={5} cols={30} />
+                <button type="submit">Create</button>
             </div>
         </form>
     )
