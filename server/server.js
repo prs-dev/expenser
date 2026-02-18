@@ -67,9 +67,18 @@ app.get('/summary', async (req, res) => {
         const expenses = await Expense.find({})
         console.log("expenses", expenses)
         // with the help of mongodb aggregate
+        const totalFromDb = await Expense.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    total: {$sum: "$amt"},
+                    count: {$sum: 1}
+                }
+            }
+        ])
         // with the help of js reduce 
-        const total = expenses.reduce((sum, curr) => (sum.amt ? sum.amt : sum) + (curr?.amt || 0))
-        console.log('total', total)
+        const total = expenses.reduce((sum, curr) => sum + (curr?.amt || 0), 0) //in reduce the aggregator must use number as its initial value
+        console.log('total', total, totalFromDb)
     } catch (error) {
         console.log("error in summarizing the expenses", error)
     }
