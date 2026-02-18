@@ -7,20 +7,20 @@ const app = express()
 
 app.use(express.json())
 
-app.post("/create-expense", async(req, res) => {
+app.post("/create-expense", async (req, res) => {
     try {
-        const {amt, category, date, note} = req.body
-        
-        if(!amt || !date) {
+        const { amt, category, date, note } = req.body
+
+        if (!amt || !date) {
             return res.status(400).json({
                 msg: "please provide all the fields!"
             })
         }
-        
+
         const expense = new Expense({
             amt, category, date, note
         })
-        
+
         await expense.save()
 
         return res.status(200).json({
@@ -32,7 +32,7 @@ app.post("/create-expense", async(req, res) => {
     }
 })
 
-app.get('/all-expense', async(req, res) => {
+app.get('/all-expense', async (req, res) => {
     try {
         const allExpenses = await Expense.find({})
 
@@ -46,11 +46,11 @@ app.get('/all-expense', async(req, res) => {
     }
 })
 
-app.delete("/delete-expense/:id", async(req, res) => {
+app.delete("/delete-expense/:id", async (req, res) => {
     try {
         const expenseId = req.params.id
         const response = await Expense.findByIdAndDelete(expenseId)
-        if(!response) return res.status(400).json({
+        if (!response) return res.status(400).json({
             msg: "not found!"
         })
         console.log("response", response)
@@ -59,6 +59,19 @@ app.delete("/delete-expense/:id", async(req, res) => {
         })
     } catch (error) {
         console.log("error in deleting expense", error)
+    }
+})
+
+app.get('/summary', async (req, res) => {
+    try {
+        const expenses = await Expense.find({})
+        console.log("expenses", expenses)
+        // with the help of mongodb aggregate
+        // with the help of js reduce 
+        const total = expenses.reduce((sum, curr) => (sum.amt ? sum.amt : sum) + (curr?.amt || 0))
+        console.log('total', total)
+    } catch (error) {
+        console.log("error in summarizing the expenses", error)
     }
 })
 

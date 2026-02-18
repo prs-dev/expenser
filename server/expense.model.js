@@ -16,7 +16,7 @@ const expenseSchema = new mongoose.Schema({
     },
     note: {
         type: String,
-        required: true
+        default: ""
     }
 }, {
     timestamps: true
