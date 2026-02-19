@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ExpenseCard = () => {
+const ExpenseCard = ({expense}) => {
     return (
         <li style={{
             display: "flex",
@@ -14,19 +14,19 @@ const ExpenseCard = () => {
         }}>
             <div>
                 <h3>Amount:</h3>
-                <span>&#x20b9; 20</span>
+                <span>&#x20b9; {expense.amt}</span>
             </div>
             <div>
                 <h3>Category:</h3>
-                <span>Shopping</span>
+                <span>{expense.category}</span>
             </div>
             <div>
                 <h3>Created On:</h3>
-                <span>24/02/2004</span>
+                <span>{expense.date}</span>
             </div>
             <div>
                 <h3>Note</h3>
-                <span>blah blah blah, bored me out of my mind</span>
+                <span>{expense.note || "no note available"}</span>
             </div>
         </li>
     )

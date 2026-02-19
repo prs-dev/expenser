@@ -56,9 +56,8 @@ export const useFetchData = ({ param, body, id }) => {
 
     const summary = async () => {
         try {
-            const response = await fetch('/api/create-expense', {
-                method: "POST",
-                body: JSON.stringify(body),
+            const response = await fetch('/api/summary', {
+                method: "GET",
                 headers: {
                     "content-type": "application/json"
                 }
