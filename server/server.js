@@ -7,7 +7,7 @@ const app = express()
 
 app.use(express.json())
 
-app.post("/create-expense", async (req, res) => {
+app.post("/api/create-expense", async (req, res) => {
     try {
         const { amt, category, date, note } = req.body
 
@@ -32,9 +32,9 @@ app.post("/create-expense", async (req, res) => {
     }
 })
 
-app.get('/all-expense', async (req, res) => {
+app.get('/api/all-expense', async (req, res) => {
     try {
-        const allExpenses = await Expense.find({})
+        const allExpenses = await Expense.find().sort({createdAt: -1}).exec()
 
         return res.status(200).json({
             msg: "success",
@@ -46,7 +46,7 @@ app.get('/all-expense', async (req, res) => {
     }
 })
 
-app.delete("/delete-expense/:id", async (req, res) => {
+app.delete("/api/delete-expense/:id", async (req, res) => {
     try {
         const expenseId = req.params.id
         const response = await Expense.findByIdAndDelete(expenseId)
@@ -62,7 +62,7 @@ app.delete("/delete-expense/:id", async (req, res) => {
     }
 })
 
-app.get('/summary', async (req, res) => {
+app.get('/api/summary', async (req, res) => {
     try {
         const expenses = await Expense.find({})
         console.log("expenses", expenses)
@@ -77,8 +77,9 @@ app.get('/summary', async (req, res) => {
             }
         ])
         // with the help of js reduce 
-        const total = expenses.reduce((sum, curr) => sum + (curr?.amt || 0), 0) //in reduce the aggregator must use number as its initial value
-        console.log('total', total, totalFromDb)
+        // const total = expenses.reduce((sum, curr) => sum + (curr?.amt || 0), 0) //in reduce the aggregator must use number as its initial value
+        // console.log('total', total, totalFromDb)
+        return res.status(200).json({msg: "success", summary: totalFromDb})
     } catch (error) {
         console.log("error in summarizing the expenses", error)
     }

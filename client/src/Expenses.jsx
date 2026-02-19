@@ -1,7 +1,10 @@
 import ExpenseCard from "./ExpenseCard"
 import ExpenseForm from "./ExpenseForm"
+import { useFetchData } from "./hooks/useFetchData"
 
 const Expenses = () => {
+    const data = useFetchData({param: "allExpense"})
+    console.log("data", data)
     return (
         <div style={{
             padding: "10px",
@@ -28,6 +31,17 @@ const Expenses = () => {
            <div>
              <h2>Add New Expense</h2>
               <ExpenseForm />
+           </div>
+           <div>
+            <h2>Summary</h2>
+            <div style={{
+                padding: "10px 0"
+            }}>
+                <p style={{
+                    marginBottom: "10px"
+                }}>Total Expenses: 10</p>
+                <p>Expenses: &#x20b9; 4000</p>
+            </div>
            </div>
         </div>
     )
