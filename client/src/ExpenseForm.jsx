@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 const inputWrapperStyles = {
     display: "flex",
     alignItems: "center",
@@ -9,9 +11,15 @@ const inputStyles = {
     width: "200px"
 }
 
-const ExpenseForm = () => {
+const ExpenseForm = ({setFormData, handleSubmitForm}) => {
+    const handleChange = (e) => {
+    setFormData(prev => ({
+        ...prev,
+        [e.target.name]: e.target.value
+    }))
+}
     return (
-        <form style={{
+        <form onSubmit={handleSubmitForm} style={{
             display: "flex",
             padding: "20px 0px",
             flexDirection: "column",
@@ -20,11 +28,11 @@ const ExpenseForm = () => {
         }}>
             <div style={{...inputWrapperStyles}}>
                 <label>Amount</label>
-                <input type="number" style={{...inputStyles}}/>
+                <input type="number" name="amt" style={{...inputStyles}} onChange={handleChange}/>
             </div>
             <div style={{...inputWrapperStyles}}>
                 <label>Category</label>
-                <select style={{...inputStyles}}>
+                <select style={{...inputStyles}} name="category" onChange={handleChange}>
                     <option value="" disabled>Select</option>
                     <option value="shopping">Shopping</option>
                     <option value="groceries">Groceries</option>
@@ -35,11 +43,11 @@ const ExpenseForm = () => {
             </div>
             <div style={{...inputWrapperStyles}}>
                 <label>Date</label>
-                <input style={{...inputStyles}} type="date" />
+                <input style={{...inputStyles}} name="date" type="date"  onChange={handleChange}/>
             </div>
             <div style={{...inputWrapperStyles}}>
                 <label>Note</label>
-                <textarea style={{...inputStyles}} name="" id="" rows={5} cols={30} />
+                <textarea style={{...inputStyles}} name="note" rows={5} cols={30}  onChange={handleChange}/>
             </div>
             <div>
                 <button type="submit">Create</button>

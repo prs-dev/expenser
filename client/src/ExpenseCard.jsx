@@ -1,15 +1,15 @@
 import React from 'react'
 
-const ExpenseCard = ({expense}) => {
+const ExpenseCard = ({expense, setDeleteId}) => {
     return (
         <li style={{
             display: "flex",
             flexDirection: "column",
             gap: "10px",
             justifyContent: "space-evenly",
-            maxHeight: "300px",
+            height: "300px",
             border: "1px solid #333",
-            minWidth: "300px",
+            width: "300px",
             padding: "10px"
         }}>
             <div>
@@ -27,6 +27,9 @@ const ExpenseCard = ({expense}) => {
             <div>
                 <h3>Note</h3>
                 <span>{expense.note || "no note available"}</span>
+            </div>
+            <div>
+                <button onClick={() => setDeleteId(expense._id)}>Delete</button>
             </div>
         </li>
     )

@@ -53,7 +53,7 @@ app.delete("/api/delete-expense/:id", async (req, res) => {
         if (!response) return res.status(400).json({
             msg: "not found!"
         })
-        console.log("response", response)
+        // console.log("response", response)
         return res.status(200).json({
             msg: `successfully deleted expenseId:${response._id}`
         })
@@ -64,8 +64,8 @@ app.delete("/api/delete-expense/:id", async (req, res) => {
 
 app.get('/api/summary', async (req, res) => {
     try {
-        const expenses = await Expense.find({})
-        console.log("expenses", expenses)
+        // const expenses = await Expense.find({})
+        // console.log("expenses", expenses)
         // with the help of mongodb aggregate
         const totalFromDb = await Expense.aggregate([
             {

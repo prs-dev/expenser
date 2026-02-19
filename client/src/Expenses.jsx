@@ -1,11 +1,34 @@
+import { useEffect, useState } from "react"
 import ExpenseCard from "./ExpenseCard"
 import ExpenseForm from "./ExpenseForm"
 import { useFetchData } from "./hooks/useFetchData"
+import useApi from './hooks/useApi'
 
 const Expenses = () => {
-    const allExpense = useFetchData({ param: "allExpense" })
-    const summary = useFetchData({ param: "summary" })
-    // console.log("data", summary)
+    const [deleteId, setDeleteId] = useState('')
+    const [formData, setFormData] = useState({})
+    const { expenses, summary, allExpense, deleteExpense, createExpense, fetchSummary } = useApi()
+    // const allExpense = useFetchData({ param: "allExpense" })
+    // const summary = useFetchData({ param: "summary" })
+    // const deleted = useFetchData({param: "deleteExpense", id: deleteId}) //cannot work
+    // console.log("data", deleted, deleteId)
+
+    useEffect(() => {
+        allExpense()
+        fetchSummary()
+    }, [])
+
+    useEffect(() => {
+        if (deleteId) deleteExpense(deleteId)
+    }, [deleteId])
+
+    const handleSubmitForm = e => {
+        e.preventDefault()
+        createExpense(formData)
+    }
+
+    console.log("formdata", formData)
+
     return (
         <div style={{
             padding: "10px",
@@ -29,11 +52,11 @@ const Expenses = () => {
                   <ExpenseCard />
                   <ExpenseCard />
                   <ExpenseCard /> */}
-                {allExpense?.expenses?.map(expense => <ExpenseCard expense={expense} />)}
+                {expenses.expenses ? expenses.expenses?.map(expense => <ExpenseCard expense={expense} setDeleteId={setDeleteId} />) : 'no data available'}
             </ul>
             <div>
                 <h2>Add New Expense</h2>
-                <ExpenseForm />
+                <ExpenseForm setFormData={setFormData} handleSubmitForm={handleSubmitForm}/>
             </div>
             <div>
                 <h2>Summary</h2>
@@ -42,8 +65,8 @@ const Expenses = () => {
                 }}>
                     <p style={{
                         marginBottom: "10px"
-                    }}>Total Expenses: {summary?.summary?.count}</p>
-                    <p>Expenses: &#x20b9; {summary?.summary?.total}</p>
+                    }}>Total Expenses: {summary?.summary?.count || "not available"}</p>
+                    <p>Expenses: &#x20b9; {summary?.summary?.total || "not available"}</p>
                 </div>
             </div>
         </div>
