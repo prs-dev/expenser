@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import ExpenseCard from "./ExpenseCard"
 import ExpenseForm from "./ExpenseForm"
-import { useFetchData } from "./hooks/useFetchData"
+// import { useFetchData } from "./hooks/useFetchData"
 import useApi from './hooks/useApi'
 
 const Expenses = () => {
