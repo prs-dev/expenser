@@ -1,5 +1,5 @@
 # An expense tracker MVP
-**Description:** A MERN based app, in which user can see what are the expenses they made and keep a record of that.
+**Description:** A continuation of my MERN based expense tracker app, this is version 2
 
 **Current Features:**
 * User can create expense

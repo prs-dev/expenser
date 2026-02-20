@@ -1,6 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const Expense = require('./expense.model')
+const Expense = require('./models/expense.model')
 require('dotenv').config()
 
 const app = express()
@@ -64,9 +64,6 @@ app.delete("/api/delete-expense/:id", async (req, res) => {
 
 app.get('/api/summary', async (req, res) => {
     try {
-        // const expenses = await Expense.find({})
-        // console.log("expenses", expenses)
-        // with the help of mongodb aggregate
         const totalFromDb = await Expense.aggregate([
             {
                 $group: {
@@ -76,9 +73,6 @@ app.get('/api/summary', async (req, res) => {
                 }
             }
         ])
-        // with the help of js reduce 
-        // const total = expenses.reduce((sum, curr) => sum + (curr?.amt || 0), 0) //in reduce the aggregator must use number as its initial value
-        // console.log('total', total, totalFromDb)
         return res.status(200).json({msg: "success", summary: totalFromDb[0]})
     } catch (error) {
         console.log("error in summarizing the expenses", error)
