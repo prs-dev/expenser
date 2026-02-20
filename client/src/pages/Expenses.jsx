@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import ExpenseCard from "./ExpenseCard"
-import ExpenseForm from "./ExpenseForm"
+import ExpenseCard from "../components/ExpenseCard"
+import ExpenseForm from "../components/ExpenseForm"
 // import { useFetchData } from "./hooks/useFetchData"
-import useApi from './hooks/useApi'
+import useApi from '../hooks/useApi'
 
 const Expenses = () => {
     const [deleteId, setDeleteId] = useState('')

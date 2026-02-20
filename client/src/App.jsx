@@ -1,4 +1,4 @@
-import Expenses from "./Expenses"
+import Expenses from "./pages/Expenses"
 
 const App = () => {
   return (
