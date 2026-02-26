@@ -3,6 +3,7 @@ import ExpenseCard from "../components/ExpenseCard"
 import ExpenseForm from "../components/ExpenseForm"
 // import { useFetchData } from "./hooks/useFetchData"
 import useApi from '../hooks/useApi'
+import Charts from "../components/Charts"
 
 const Expenses = () => {
     const [deleteId, setDeleteId] = useState('')
@@ -27,7 +28,7 @@ const Expenses = () => {
         createExpense(formData)
     }
 
-    console.log("formdata", formData)
+    console.log("formdata", formData, expenses)
 
     return (
         <div style={{
@@ -56,17 +57,27 @@ const Expenses = () => {
             </ul>
             <div>
                 <h2>Add New Expense</h2>
-                <ExpenseForm setFormData={setFormData} handleSubmitForm={handleSubmitForm}/>
+                <ExpenseForm setFormData={setFormData} handleSubmitForm={handleSubmitForm} />
             </div>
             <div>
                 <h2>Summary</h2>
                 <div style={{
-                    padding: "10px 0"
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap:"40px",
+                    padding: '10px 0'
                 }}>
-                    <p style={{
-                        marginBottom: "10px"
-                    }}>Total Expenses: {summary?.summary?.count || "not available"}</p>
-                    <p>Expenses: &#x20b9; {summary?.summary?.total || "not available"}</p>
+                    <div style={{
+                        padding: "10px 0"
+                    }}>
+                        <p style={{
+                            marginBottom: "10px"
+                        }}>Total Expenses: {summary?.summary?.count || "not available"}</p>
+                        <p>Expenses: &#x20b9; {summary?.summary?.total || "not available"}</p>
+                    </div>
+                    <div>
+                        <Charts expenses={expenses.expenses}/>
+                    </div>
                 </div>
             </div>
         </div>
