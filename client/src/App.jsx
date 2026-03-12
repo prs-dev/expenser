@@ -1,9 +1,15 @@
 import Expenses from "./pages/Expenses"
+import Navbar from './components/Navbar'
 
 const App = () => {
   return (
     <div>
-      <Expenses />
+      <nav>
+        <Navbar />
+      </nav>
+      <main>
+        <Expenses />
+      </main>
     </div>
   )
 }
