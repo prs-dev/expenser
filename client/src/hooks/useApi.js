@@ -5,7 +5,7 @@ const useApi = () => {
 
     const createExpense = async (body) => {
         try {
-            const response = await fetch('/api/create-expense', {
+            const response = await fetch('/api/expense/create-expense', {
                 method: "POST",
                 body: JSON.stringify(body),
                 headers: {
@@ -23,7 +23,7 @@ const useApi = () => {
 
     const deleteExpense = async (id) => {
         try {
-            const response = await fetch(`/api/delete-expense/${id}`, {
+            const response = await fetch(`/api/expense/delete-expense/${id}`, {
                 method: "DELETE",
                 headers: {
                     "content-type": "application/json"
@@ -40,7 +40,7 @@ const useApi = () => {
 
     const allExpense = async () => {
         try {
-            const response = await fetch('/api/all-expense', {
+            const response = await fetch('/api/expense/all-expense', {
                 method: "GET",
                 headers: {
                     "content-type": "application/json"
@@ -57,7 +57,7 @@ const useApi = () => {
 
     const fetchSummary = async () => {
         try {
-            const response = await fetch('/api/summary', {
+            const response = await fetch('/api/expense/summary', {
                 method: "GET",
                 headers: {
                     "content-type": "application/json"

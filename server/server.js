@@ -7,7 +7,7 @@ const app = express()
 
 app.use(express.json())
 
-app.use('/api', expenseRouter)
+app.use('/api/expense', expenseRouter)
 
 app.get("/", (req, res) => {
     res.send('hello from server')
