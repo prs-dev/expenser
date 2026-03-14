@@ -72,13 +72,31 @@ const useApi = () => {
         }
     }
 
+    const registerUser = async(body) => {
+        try {
+            const res = await fetch('/api/auth/register', {
+                method: "post",
+                body: JSON.stringify(body),
+                headers: {
+                    "content-type": "application/json"
+                }
+            })
+            if(res.ok) {
+                console.log("user registered", await res.json())
+            }
+        } catch (error) {
+            console.log("error in registering user", error)
+        }
+    }
+
     return {
         expenses,
         summary,
         createExpense,
         fetchSummary,
         allExpense,
-        deleteExpense
+        deleteExpense,
+        registerUser
     }
 }
 
