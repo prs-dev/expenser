@@ -1,10 +1,19 @@
-import {createContext, useState} from 'react'
+import {createContext, useEffect, useState} from 'react'
 
 export const UserContext = createContext()
 
 export const UserContextProvider = ({children}) => {
-    const [token, setToken] = useState(null)
-    console.log("token", token)
+    const [token, setToken] = useState(() => {
+        if(localStorage.getItem('token')) return localStorage.getItem('token')
+    })
+
+    useEffect(() => {
+        const storedData = localStorage.getItem("token")
+        if(token && token.length !== 0) setToken(storedData)
+        else localStorage.removeItem("token")
+    }, [])
+
+    // console.log("token", token)
     return <UserContext.Provider value={{token, setToken}}>
         {children}
     </UserContext.Provider>

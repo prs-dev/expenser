@@ -22,6 +22,7 @@ const EntryForm = ({type}) => {
       // console.log("data", setToken)
       res.then((data) => {
         setToken(data.token ? data.token : null)
+        if(data.token) localStorage.setItem("token", data.token)
         navigate('/')
       })
     }
