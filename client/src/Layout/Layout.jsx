@@ -1,29 +1,38 @@
 import { Outlet, Link } from 'react-router-dom'
-import Navbar from './components/Navbar'
+import Navbar from '../components/Navbar'
+import Sidebar from '../components/Sidebar'
 
 const Layout = ({token}) => {
     const mainStyle = !token
   ? {
       display: "flex",
-      height: "100vh",
+      height: "calc(100vh - 70px)",
       alignItems: "center",
       justifyContent: "center",
     }
-  : undefined
+  : {
+    height: "calc(100vh - 100px)",
+  }
     return (
-        <>
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            // justifyContent: "space-between",
+            height: "100vh"
+        }}>
             <header>
                 <nav>
                     <Navbar token={token} />
                 </nav>
             </header>
             <main style={mainStyle}>
+                {token && <Sidebar />}
                 <Outlet />
             </main>
             <footer>
                 &#169; prs-dev
             </footer>
-        </>
+        </div>
     )
 }
 
