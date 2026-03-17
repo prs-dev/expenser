@@ -2,7 +2,7 @@ import { Outlet, Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
 
-const Layout = ({token}) => {
+const Layout = ({token, logout}) => {
     const mainStyle = !token
   ? {
       display: "flex",
@@ -22,7 +22,7 @@ const Layout = ({token}) => {
         }}>
             <header>
                 <nav>
-                    <Navbar token={token} />
+                    <Navbar token={token} logout={logout}/>
                 </nav>
             </header>
             <main style={mainStyle}>

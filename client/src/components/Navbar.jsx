@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 
-const Navbar = ({token}) => {
+const Navbar = ({token, logout}) => {
   return (
     <div style={{
       height: "70px",
@@ -22,7 +22,7 @@ const Navbar = ({token}) => {
         {!token ? <>
           <li><Link to='/register'>Register</Link></li>
         <li><Link to='/login'>Login</Link></li>
-        </> : <li>Logout</li>}
+        </> : <li style={{cursor: "pointer"}} onClick={logout}>Logout</li>}
       </ul>
     </div>
   )
