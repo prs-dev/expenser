@@ -9,7 +9,7 @@ const App = () => {
       <nav>
         <Navbar />
       </nav>
-      <main>
+      <main style={!token ? {display: "flex", height: "100vh", alignItems: "center", justifyContent: "center"} : {}}>
        {token ?  <Expenses /> : <Register />}
       </main>
     </div>
