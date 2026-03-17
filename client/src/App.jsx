@@ -15,6 +15,7 @@ const App = () => {
     <Routes>
       <Route element={<Layout token={token}/>}>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<h2>404 not found</h2>} />
       </Route>
       <Route element={<ProtectedRoute token={token}/>}>

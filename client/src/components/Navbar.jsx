@@ -1,6 +1,6 @@
-import React from 'react'
+import {Link} from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({token}) => {
   return (
     <div style={{
       height: "70px",
@@ -12,16 +12,17 @@ const Navbar = () => {
       color: "white"
     }}>
       <div>
-        <h2>Expenser</h2>
+        <h2><Link to='/'>Expenser</Link></h2>
       </div>
       <ul style={{
         listStyle: "none",
         display: "flex",
         gap: "10px"
       }}>
-        <li>Register</li>
-        <li>Login</li>
-        <li>Logout</li>
+        {!token ? <>
+          <li><Link to='/register'>Register</Link></li>
+        <li><Link to='/login'>Login</Link></li>
+        </> : <li>Logout</li>}
       </ul>
     </div>
   )

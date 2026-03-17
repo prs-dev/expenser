@@ -14,7 +14,7 @@ const Layout = ({token}) => {
         <>
             <header>
                 <nav>
-                    <Navbar />
+                    <Navbar token={token} />
                 </nav>
             </header>
             <main style={mainStyle}>
