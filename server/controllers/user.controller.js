@@ -27,7 +27,10 @@ const userLogin = async (req, res) => {
         if (!email || !password) return res.status(400).json({ success: false, msg: "Please provide all fields!" })
         const userExists = await User.findOne({ email: email })
         if (!userExists) return res.status(400).json({ success: false, msg: "user does not exists" })
-        const token = jwt.sign({_id: userExists._id}, process.env.SECRET)
+        const passwordMatch = bcrypt.compareSync(password, userExists.password)
+        // console.log(password, userExists.password, passwordMatch)
+        if (!passwordMatch) return res.status(400).json({ success: false, msg: "Invalid credentials" })
+        const token = jwt.sign({ _id: userExists._id }, process.env.SECRET)
         res.status(201).json({ msg: "User logged in successfully", token })
     } catch (error) {
         console.log("error in user login", error)
