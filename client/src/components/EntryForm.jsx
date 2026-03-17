@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react'
 import useApi from '../hooks/useApi'
 import { UserContext } from '../Context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 const EntryForm = ({type}) => {
     const [data, setData] = useState(null)
     const {registerUser, loginUser} = useApi()
     const {setToken, token} = useContext(UserContext)
+    const navigate = useNavigate()
 
     const handleChange = e => {
        setData(prev => ({
@@ -18,7 +20,10 @@ const EntryForm = ({type}) => {
       e.preventDefault()
       const res = type === "login" ? loginUser(data) : registerUser(data)
       // console.log("data", setToken)
-      res.then((data) => setToken(data.token ? data.token : null))
+      res.then((data) => {
+        setToken(data.token ? data.token : null)
+        navigate('/')
+      })
     }
 
   return (

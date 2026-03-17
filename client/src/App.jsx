@@ -2,21 +2,27 @@ import Expenses from "./pages/Expenses"
 import Navbar from './components/Navbar'
 import Register from "./pages/Register"
 import Login from './pages/Login'
+import { Routes, Route } from "react-router-dom"
+import Layout from "./Layout"
+import ProtectedRoute from "./ProtectedRoute"
 import { UserContext } from './Context/UserContext'
 import { useContext } from "react"
 
 const App = () => {
   const {token} = useContext(UserContext)
-  console.log("token", token)
+  // const token = true
   return (
-    <div>
-      <nav>
-        <Navbar />
-      </nav>
-      <main style={!token ? {display: "flex", height: "100vh", alignItems: "center", justifyContent: "center"} : {}}>
-       {token ?  <Expenses /> : <Login />}
-      </main>
-    </div>
+    <Routes>
+      <Route element={<Layout token={token}/>}>
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<h2>404 not found</h2>} />
+      </Route>
+      <Route element={<ProtectedRoute token={token}/>}>
+        <Route element={<Layout token={token}/>}>
+          <Route path="/" element={<Expenses />} />
+        </Route>
+      </Route>
+    </Routes>
   )
 }
 
