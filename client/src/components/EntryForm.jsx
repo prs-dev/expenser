@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import useApi from '../hooks/useApi'
+import { UserContext } from '../Context/UserContext'
 
 const EntryForm = ({type}) => {
     const [data, setData] = useState(null)
-    const {registerUser} = useApi()
+    const {registerUser, loginUser} = useApi()
+    const {setToken, token} = useContext(UserContext)
 
     const handleChange = e => {
        setData(prev => ({
@@ -14,9 +16,11 @@ const EntryForm = ({type}) => {
 
     const handleSubmit = (e) => {
       e.preventDefault()
-      registerUser(data)
-      // console.log("data", data)
+      const res = type === "login" ? loginUser(data) : registerUser(data)
+      // console.log("data", setToken)
+      res.then((data) => setToken(data.token ? data.token : null))
     }
+
   return (
     <form onSubmit={handleSubmit}>
         {type === 'register' && <div>

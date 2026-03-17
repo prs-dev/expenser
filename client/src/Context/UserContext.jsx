@@ -1,4 +1,11 @@
-import {createContext} from 'react'
+import {createContext, useState} from 'react'
 
-const UserContext = createContext()
+export const UserContext = createContext()
 
+export const UserContextProvider = ({children}) => {
+    const [token, setToken] = useState(null)
+    console.log("token", token)
+    return <UserContext.Provider value={{token, setToken}}>
+        {children}
+    </UserContext.Provider>
+}

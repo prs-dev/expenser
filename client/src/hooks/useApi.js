@@ -82,10 +82,31 @@ const useApi = () => {
                 }
             })
             if(res.ok) {
-                console.log("user registered", await res.json())
+                 const data = await res.json()
+                console.log("user registered", data)
+                return data
             }
         } catch (error) {
             console.log("error in registering user", error)
+        }
+    }
+
+    const loginUser = async(body) => {
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: "post",
+                body: JSON.stringify(body),
+                headers: {
+                    "content-type": "application/json"
+                }
+            })
+            if(res.ok) {
+                const data = await res.json()
+                console.log("user logged in successfully", data)
+                return data
+            }
+        } catch (error) {
+            console.log("error in login user", error)
         }
     }
 
@@ -96,7 +117,8 @@ const useApi = () => {
         fetchSummary,
         allExpense,
         deleteExpense,
-        registerUser
+        registerUser,
+        loginUser
     }
 }
 

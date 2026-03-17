@@ -22,7 +22,16 @@ const userRegister = async (req, res) => {
 }
 
 const userLogin = async (req, res) => {
-    res.send("you are user login")
+    try {
+        const { email, password } = req.body
+        if (!email || !password) return res.status(400).json({ success: false, msg: "Please provide all fields!" })
+        const userExists = await User.findOne({ email: email })
+        if (!userExists) return res.status(400).json({ success: false, msg: "user does not exists" })
+        const token = jwt.sign({_id: userExists._id}, process.env.SECRET)
+        res.status(201).json({ msg: "User logged in successfully", token })
+    } catch (error) {
+        console.log("error in user login", error)
+    }
 }
 
 module.exports = {
