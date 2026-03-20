@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom'
 
 const Navbar = ({token, logout}) => {
+  // console.log("settoken", setToken)
   return (
     <div style={{
       height: "70px",
@@ -12,7 +13,7 @@ const Navbar = ({token, logout}) => {
       color: "white"
     }}>
       <div>
-        <h2><Link to='/'>Expenser</Link></h2>
+        <h2><Link className='link' to='/'>Expenser</Link></h2>
       </div>
       <ul style={{
         listStyle: "none",
@@ -20,8 +21,8 @@ const Navbar = ({token, logout}) => {
         gap: "10px"
       }}>
         {!token ? <>
-          <li><Link to='/register'>Register</Link></li>
-        <li><Link to='/login'>Login</Link></li>
+          <li><Link className='link' to='/register'>Register</Link></li>
+        <li><Link className='link' to='/login'>Login</Link></li>
         </> : <li style={{cursor: "pointer"}} onClick={logout}>Logout</li>}
       </ul>
     </div>

@@ -12,21 +12,21 @@ import Dashboard from "./pages/Dashboard"
 import ExpensesTable from "./components/ExpensesTable"
 
 const App = () => {
-  const {token, setToken} = useContext(UserContext)
-  // const token = true
+  const { token, setToken } = useContext(UserContext)
   const logout = () => {
-    localStorage.removeItem('token')
     setToken(null)
+    localStorage.removeItem("token")
   }
+
   return (
     <Routes>
-      <Route element={<Layout token={token} logout={logout}/>}>
+      <Route element={<Layout {...{ token, logout }} />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<h2>404 not found</h2>} />
       </Route>
-      <Route element={<ProtectedRoute token={token}/>}>
-        <Route element={<Layout token={token}/>}>
+      <Route element={<ProtectedRoute {...{ token }} />}>
+        <Route element={<Layout {...{ token, logout }} />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/form" element={<ExpenseForm />} />
           <Route path="/table" element={<ExpensesTable />} />
