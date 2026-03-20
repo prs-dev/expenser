@@ -1,6 +1,7 @@
-import React from 'react'
+import { useNavigate } from "react-router-dom"
 
 const Sidebar = () => {
+  const navigate = useNavigate()
   return (
     <div style={{
         height: "100%",
@@ -16,11 +17,11 @@ const Sidebar = () => {
             alignItems: "center",
             listStyle: 'none',
             color: "white",
-            fontWeight :"700"
+            fontWeight :"700",
         }}>
-            <li>Dashboard</li>
-            <li>New Expense</li>
-            <li>All Expense</li>
+            <li onClick={() => navigate('/')}>Dashboard</li>
+            <li onClick={() => navigate('/form')}>New Expense</li>
+            <li onClick={() => navigate('/table')}>All Expense</li>
         </ul>
     </div>
   )

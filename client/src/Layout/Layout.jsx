@@ -11,7 +11,9 @@ const Layout = ({token, logout}) => {
       justifyContent: "center",
     }
   : {
-    height: "calc(100vh - 100px)",
+    display: "flex",
+    gap: "10px",
+    height: "calc(100vh - 100px)"
   }
     return (
         <div style={{
