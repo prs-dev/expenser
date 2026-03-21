@@ -20,3 +20,21 @@ footer {
   color: white;
   text-decoration: none;
 }
+
+.sidebar-list li:hover {
+  text-decoration: underline;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}
+
+th, td {
+  border: 1px solid #333;
+  padding: 10px;
+}

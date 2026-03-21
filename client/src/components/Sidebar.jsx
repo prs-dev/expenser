@@ -9,9 +9,9 @@ const Sidebar = () => {
         background: '#333',
         padding: "10px"
     }}>
-        <ul style={{
+        <ul className="sidebar-list" style={{
             display: "flex",
-            justifyContent: "center",
+            // // justifyContent: "center",
             flexDirection: "column",
             gap: "20px",
             alignItems: "center",
@@ -19,12 +19,16 @@ const Sidebar = () => {
             color: "white",
             fontWeight :"700",
         }}>
-            <li onClick={() => navigate('/')}>Dashboard</li>
-            <li onClick={() => navigate('/form')}>New Expense</li>
-            <li onClick={() => navigate('/table')}>All Expense</li>
+            <li style={liStyle} onClick={() => navigate('/')}>Dashboard</li>
+            <li style={liStyle} onClick={() => navigate('/form')}>New Expense</li>
+            <li style={liStyle} onClick={() => navigate('/table')}>All Expense</li>
         </ul>
     </div>
   )
+}
+
+const liStyle = {
+  cursor: "pointer"
 }
 
 export default Sidebar
