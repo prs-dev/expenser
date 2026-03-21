@@ -23,8 +23,12 @@ const ExpenseForm = ({setFormData, handleSubmitForm}) => {
             display: "flex",
             padding: "20px 0px",
             flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
             gap: "10px",
-            maxWidth: '400px'
+            // maxWidth: '400px'
+            width: "100%",
+            height: "100%"
         }}>
             <div style={{...inputWrapperStyles}}>
                 <label>Amount</label>

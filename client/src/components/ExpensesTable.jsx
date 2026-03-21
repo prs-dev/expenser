@@ -26,7 +26,9 @@ const ExpensesTable = () => {
               <td>&#8377; {expense.amt}</td>
               <td>{expense.category}</td>
               <td>{expense.date}</td>
-              <td>{expense.note}</td>
+              <td style={{
+                maxWidth: "200px",
+              }}>{expense.note}</td>
             </tr>
           </>)
         }
