@@ -9,9 +9,21 @@ const Dashboard = () => {
       fetchSummary()
     }, [])
   return (
-    <div>
+    <div style={{
+      display: 'flex',
+      flexDirection: "column",
+      gap: "10px",
+      padding: "10px"
+    }}>
       <div style={{
-        padding: "10px 0"
+        padding: "10px 0",
+        border: "1px solid #333",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: 'center',
+        borderRadius: "10px",
+        height: "100px"
       }}>
         <p style={{
           marginBottom: "10px"

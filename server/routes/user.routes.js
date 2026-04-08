@@ -1,8 +1,7 @@
-const router = require("express").Router()
-const {userRegister, userLogin} = require("../controllers/user.controller")
+const router = require('express').Router()
+const {validToken} = require('../middlewares/auth')
+const {userDetails} = require('../controllers/user.controller')
 
-router.post('/register', userRegister)
-
-router.post('/login', userLogin)
+router.get("/", validToken, userDetails)
 
 module.exports = router
