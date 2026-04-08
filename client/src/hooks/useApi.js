@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { UserContext } from "../Context/UserContext"
 const useApi = () => {
     const [expenses, setExpenses] = useState([])
     const [summary, setSummary] = useState({})
+    const {token} = useContext(UserContext)
 
     const createExpense = async (body) => {
         try {
@@ -9,7 +11,8 @@ const useApi = () => {
                 method: "POST",
                 body: JSON.stringify(body),
                 headers: {
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "authorization": `Bearer ${token}`
                 }
             })
             if (response.ok) {
@@ -43,7 +46,8 @@ const useApi = () => {
             const response = await fetch('/api/expense/all-expense', {
                 method: "GET",
                 headers: {
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "authorization": `Bearer ${token}`
                 }
             })
             if (response.ok) {
@@ -60,7 +64,8 @@ const useApi = () => {
             const response = await fetch('/api/expense/summary', {
                 method: "GET",
                 headers: {
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "authorization": `Bearer ${token}`
                 }
             })
             if (response.ok) {

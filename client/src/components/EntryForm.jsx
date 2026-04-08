@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import useApi from '../hooks/useApi'
 import { UserContext } from '../Context/UserContext'
 import { useNavigate } from 'react-router-dom'
+import { formStyles } from '../styles/styles'
 
 const EntryForm = ({type}) => {
     const [data, setData] = useState(null)
@@ -28,16 +29,31 @@ const EntryForm = ({type}) => {
     }
 
   return (
-    <form onSubmit={handleSubmit}>
-        {type === 'register' && <div>
+    <form onSubmit={handleSubmit} style={formStyles}>
+        {type === 'register' && <div style={{
+          display: "flex",
+          gap: "10px",
+          alignItems: 'center',
+          justifyContent: "space-between"
+        }}>
             <label htmlFor="">Username</label>
             <input type="text" name="username" value={data?.username} onChange={handleChange}/>
         </div>}
-        <div>
+        <div style={{
+          display: "flex",
+          gap: "10px",
+          alignItems: 'center',
+          justifyContent: "space-between"
+        }}>
             <label htmlFor="">Email</label>
             <input type="email" name='email' value={data?.email} onChange={handleChange}/>
         </div>
-        <div>
+        <div style={{
+          display: "flex",
+          gap: "10px",
+          alignItems: 'center',
+          justifyContent: "space-between"
+        }}>
             <label htmlFor="">Password</label>
             <input type="password" name='password' value={data?.password} onChange={handleChange}/>
         </div>

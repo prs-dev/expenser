@@ -6,9 +6,11 @@ deleteExpense,
 summary
 } = require('../controllers/expense.controller.js')
 
-router.get('/all-expense', allExpense)
-router.get('/summary', summary)
-router.delete('/delete-expense/:id', deleteExpense)
-router.post('/create-expense', createExpense)
+const {validToken} = require("../middlewares/auth.js")
+
+router.get('/all-expense', validToken, allExpense)
+router.get('/summary', validToken, summary)
+router.delete('/delete-expense/:id', validToken, deleteExpense)
+router.post('/create-expense', validToken, createExpense)
 
 module.exports = router

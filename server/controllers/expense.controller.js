@@ -1,4 +1,5 @@
 const Expense = require('../models/expense.model')
+const User = require('../models/user.model')
 
 const createExpense = async (req, res) => {
     try {
@@ -10,11 +11,18 @@ const createExpense = async (req, res) => {
             })
         }
 
+        const user = req._id
+
+        const userDetails = await User.findOne({_id: user})
+
         const expense = new Expense({
-            amt, category, date, note
+            amt, category, date, note, user
         })
 
+        userDetails.expenses = [...userDetails.expenses, expense._id]
+
         await expense.save()
+        await userDetails.save()
 
         return res.status(200).json({
             msg: "success",
@@ -59,6 +67,7 @@ const summary = async (req, res) => {
 }
 
 const allExpense = async (req, res) => {
+    //todo: add pagination to this
     try {
         const allExpenses = await Expense.find().sort({createdAt: -1}).exec()
 
