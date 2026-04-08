@@ -1,5 +1,6 @@
 const Expense = require('../models/expense.model')
 const User = require('../models/user.model')
+const mongoose = require("mongoose")
 
 const createExpense = async (req, res) => {
     try {
@@ -51,7 +52,11 @@ const deleteExpense = async (req, res) => {
 
 const summary = async (req, res) => {
     try {
+        // const totalFromDb = await Expense.find({user: req._id}).aggregate([ -- does not work because aggregate works on whole document
         const totalFromDb = await Expense.aggregate([
+            {
+                $match: {user: new mongoose.Types.ObjectId(req._id)}
+            },
             {
                 $group: {
                     _id: null,
@@ -69,7 +74,7 @@ const summary = async (req, res) => {
 const allExpense = async (req, res) => {
     //todo: add pagination to this
     try {
-        const allExpenses = await Expense.find().sort({createdAt: -1}).exec()
+        const allExpenses = await Expense.find({user: req._id}).sort({createdAt: -1}).exec() //only find the logged in user expenses
 
         return res.status(200).json({
             msg: "success",
